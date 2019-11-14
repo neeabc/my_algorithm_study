@@ -8,7 +8,7 @@ public class Demo02 {
 	public void quickSort(int[] nums,int start,int end) {
 		
 		//结束条件
-		if(end-start==1) { //只有一个数,什么也不做,返回
+		if(end-start<=1) { //只有一个数,什么也不做,返回
 			return;
 		}
 		
@@ -18,31 +18,18 @@ public class Demo02 {
 		int i=1;
 		int j=end-1;
 		
-		//将i移动到大于nums[start]的数的位置
-		while(nums[i]<=nums[start]) {
-			i++;
-		}
-		
-		//将j移动到小于nums[start]的数的位置
-		while(nums[j]>=nums[start]) {
-			j++;
-		}
-		
 		while(i<=j) {
-			MyArrayUtil.swap(nums, i, j);
-			
-			while(nums[i]<=nums[start]) {
+			if(nums[i]>nums[start]) {
+				MyArrayUtil.swap(nums, i, j);
+				j--;
+			}else {
 				i++;
 			}
-			
-			while(nums[j]>=nums[start]) {
-				j++;
-			}
 		}
 		
-		MyArrayUtil.swap(nums, start, i-1);
+		MyArrayUtil.swap(nums, start, i-1); //将首位移动到分界位置
 		
-		quickSort(nums,start,i-2); //排序左边
+		quickSort(nums,start,i-1); //排序左边
 		quickSort(nums,i,end); //排序右边
 		
 	}
