@@ -1,18 +1,51 @@
 package day001;
 
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
 public class Demo01 {
-	//汉诺塔
-	public void hanoi(int num,String A,String B,String C) {
-		
-		//结束条件
-		if(num==1) {
-			System.out.println(A+"-->"+C); //当只有一个盘子时,直接从A到C
-			return;
+	//插入排序
+	public void insertSort(int[] arr) {  //升序排列
+		for(int i=1;i<arr.length;i++) {
+			int temp = arr[i];
+			
+			int j=i;
+			
+			while(j>0&&temp<arr[j-1]) {
+				arr[j]=arr[j-1];
+				j--;
+			}
+			
+			arr[j]=temp;
 		}
+	}
+	
+	@Test
+	public void testInsertUp() {
 		
-		hanoi(num-1,A,C,B); //num-1个盘子,通过C,从A到B
-		System.out.println(A+"-->"+C); //最底下的盘子,直接从A到C
-		hanoi(num-1,B,A,C); //num-1个盘子,通过A,从B到C
-		
+		int[] arr = {4,2};
+		insertSort(arr);
+		System.out.println(Arrays.toString(arr));
+	}
+	
+	//插入排序
+	public void insertSortDown(int[] arr) { //降序排列
+		for(int i=1;i<arr.length;i++) {
+			int temp = arr[i];
+			int j=i;
+			while(j>0&&temp>arr[j-1]) {
+				arr[j]=arr[j-1];
+				j--;
+			}
+			arr[j]=temp;
+		}
+	}
+	
+	@Test
+	public void testInsretDown() {
+		int[] arr = {2,4,6,1,3,1,34,5,46,54,63,2,4,654,756};
+		insertSortDown(arr);
+		System.out.println(Arrays.toString(arr));
 	}
 }
